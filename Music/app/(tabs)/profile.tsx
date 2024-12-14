@@ -7,6 +7,8 @@ import {
   Switch,
   StyleSheet,
   Animated,
+  Alert,
+  ScrollView,
 } from "react-native";
 
 const ProfilePage = () => {
@@ -25,8 +27,16 @@ const ProfilePage = () => {
     useNativeDriver: true,
   }).start();
 
+  // Handle Button Clicks
+  const handleButtonClick = (buttonName: string) => {
+    Alert.alert(buttonName, "Not connected to Internet");
+  };
+
   return (
-    <View style={isDarkMode ? styles.containerDark : styles.container}>
+    <ScrollView
+      style={isDarkMode ? styles.containerDark : styles.container}
+      contentContainerStyle={{ paddingBottom: 30 }} // Ensure content doesn't clip at the bottom
+    >
       {/* App Name */}
       <Text style={styles.appName}>SoundScape</Text>
 
@@ -65,27 +75,42 @@ const ProfilePage = () => {
 
       {/* Account Settings */}
       <Text style={styles.sectionHeader}>Account Settings</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleButtonClick("Update Password")}
+      >
         <Text style={styles.buttonText}>Update Password</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleButtonClick("Delete Account")}
+      >
         <Text style={styles.buttonText}>Delete Account</Text>
       </TouchableOpacity>
 
       {/* Help and Feedback */}
       <Text style={styles.sectionHeader}>Help & Feedback</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleButtonClick("Help & Support")}
+      >
         <Text style={styles.buttonText}>Help & Support</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleButtonClick("Rate Us")}
+      >
         <Text style={styles.buttonText}>Rate Us</Text>
       </TouchableOpacity>
 
       {/* Logout */}
-      <TouchableOpacity style={styles.logoutButton}>
+      <TouchableOpacity
+        style={styles.logoutButton}
+        onPress={() => handleButtonClick("Logout")}
+      >
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

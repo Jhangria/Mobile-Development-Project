@@ -10,8 +10,8 @@ import {
 
 const IndexPage = () => {
   const [showSeeAll, setShowSeeAll] = useState(false); // State to toggle between pages
+  const [seeAllTitle, setSeeAllTitle] = useState(""); // Title for the "See All" section
 
-  // Songs data (including duplicates as requested)
   const songs = [
     {
       title: "Sher-E-Punjab",
@@ -122,12 +122,13 @@ const IndexPage = () => {
     },
   ];
 
+
   // Render "See All" page
   if (showSeeAll) {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.sectionTitle}>Recently Played - See All</Text>
+          <Text style={styles.sectionTitle}>{seeAllTitle} - See All</Text>
         </View>
         {songs.map((song, index) => (
           <View key={index} style={styles.songCard}>
@@ -163,40 +164,72 @@ const IndexPage = () => {
         <Text style={styles.sectionTitle}>Party Vibes</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {/* Friday Party */}
-          <TouchableOpacity style={styles.partyCard}>
+          <TouchableOpacity
+            style={styles.partyCard}
+            onPress={() => {
+              setSeeAllTitle("Friday Party");
+              setShowSeeAll(true);
+            }}
+          >
             <Image
               style={styles.partyImage}
-              source={{ uri: "https://i.ytimg.com/vi/1A0Hik99gIo/maxresdefault.jpg" }}
+              source={{
+                uri: "https://i.ytimg.com/vi/1A0Hik99gIo/maxresdefault.jpg",
+              }}
             />
             <Text style={styles.partyTitle}>Friday Party</Text>
             <Text style={styles.partySubtitle}>Get the party started!</Text>
           </TouchableOpacity>
 
           {/* Saturday Party */}
-          <TouchableOpacity style={styles.partyCard}>
+          <TouchableOpacity
+            style={styles.partyCard}
+            onPress={() => {
+              setSeeAllTitle("Saturday Party");
+              setShowSeeAll(true);
+            }}
+          >
             <Image
               style={styles.partyImage}
-              source={{ uri: "https://stafm.com.au/wp-content/uploads/2023/10/Saturday-Night-Party-Mix.jpg" }}
+              source={{
+                uri: "https://stafm.com.au/wp-content/uploads/2023/10/Saturday-Night-Party-Mix.jpg",
+              }}
             />
             <Text style={styles.partyTitle}>Saturday Party</Text>
             <Text style={styles.partySubtitle}>Keep the vibe alive!</Text>
           </TouchableOpacity>
 
           {/* Weekly New */}
-          <TouchableOpacity style={styles.partyCard}>
+          <TouchableOpacity
+            style={styles.partyCard}
+            onPress={() => {
+              setSeeAllTitle("Weekly New");
+              setShowSeeAll(true);
+            }}
+          >
             <Image
               style={styles.partyImage}
-              source={{ uri: "https://i.ytimg.com/vi/Ej_vV8sA39E/maxresdefault.jpg" }}
+              source={{
+                uri: "https://i.ytimg.com/vi/Ej_vV8sA39E/maxresdefault.jpg",
+              }}
             />
             <Text style={styles.partyTitle}>Weekly New</Text>
             <Text style={styles.partySubtitle}>Fresh tunes every week!</Text>
           </TouchableOpacity>
 
           {/* Sunday Mix */}
-          <TouchableOpacity style={styles.partyCard}>
+          <TouchableOpacity
+            style={styles.partyCard}
+            onPress={() => {
+              setSeeAllTitle("Sunday Mix");
+              setShowSeeAll(true);
+            }}
+          >
             <Image
               style={styles.partyImage}
-              source={{ uri: "https://i.ytimg.com/vi/0wMmE-N4Enc/maxresdefault.jpg"}}
+              source={{
+                uri: "https://i.ytimg.com/vi/0wMmE-N4Enc/maxresdefault.jpg",
+              }}
             />
             <Text style={styles.partyTitle}>Sunday Mix</Text>
             <Text style={styles.partySubtitle}>Relax and unwind.</Text>

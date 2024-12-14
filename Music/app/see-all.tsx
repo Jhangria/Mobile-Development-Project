@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 
 const SeeAllPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void }) => {
   const songs = [
@@ -60,32 +68,44 @@ const SeeAllPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void
   ];
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>All Songs</Text>
-      </View>
-      {songs.map((song, index) => (
-        <View key={index} style={styles.songCard}>
-          <Image source={{ uri: song.image }} style={styles.songImage} />
-          <View style={styles.songInfo}>
-            <Text style={styles.songTitle}>{song.title}</Text>
-            <Text style={styles.songSubtitle}>{song.subtitle}</Text>
-          </View>
-          <Text style={styles.songDuration}>{song.duration}</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.header}>
+          <Text style={styles.title}>All Songs</Text>
         </View>
-      ))}
-      <TouchableOpacity onPress={() => setCurrentPage("index")} style={styles.backButton}>
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        {songs.map((song, index) => (
+          <View key={index} style={styles.songCard}>
+            <Image source={{ uri: song.image }} style={styles.songImage} />
+            <View style={styles.songInfo}>
+              <Text style={styles.songTitle}>{song.title}</Text>
+              <Text style={styles.songSubtitle}>{song.subtitle}</Text>
+            </View>
+            <Text style={styles.songDuration}>{song.duration}</Text>
+          </View>
+        ))}
+        <TouchableOpacity onPress={() => setCurrentPage("index")} style={styles.backButton}>
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#1E1E2C", // Ensures the area outside scrollable content matches the background
+  },
   container: {
     flex: 1,
-    backgroundColor: "#1E1E2C",
     padding: 16,
+  },
+  scrollContent: {
+    paddingBottom: 50, // Provides enough space at the bottom to avoid clipping
   },
   header: {
     marginBottom: 16,
